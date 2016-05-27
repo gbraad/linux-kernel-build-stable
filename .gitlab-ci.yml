@@ -9,9 +9,9 @@ pages:
   script:
   - cat /etc/redhat-release
   - mkdir public
-  - mkdir linux
-  - wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.5.5.tar.xz
-  - tar -xJf linux-4.5.5.tar.xz -C linux
+  - curl https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.5.5.tar.xz -o linux.tar.xz
+  - tar -xJf linux.tar.xz
+  - mv linux-4.5.5 linux
   - cp config linux/.config
   - cd linux
   - make olddefconfig
