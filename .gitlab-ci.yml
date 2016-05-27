@@ -1,0 +1,15 @@
+image: centos:latest
+
+before_script:
+  - yum -y install git epel-release "@Development Tools"
+  - yum -y install createrepo mock redhat-rpm-config rpmdevtools
+
+pages:
+  script:
+  - cat /etc/redhat-release
+  - mkdir public
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
