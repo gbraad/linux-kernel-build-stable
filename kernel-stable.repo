@@ -1,0 +1,5 @@
+[kernel-stable]
+name=Linux kernel stable
+baseurl=http://gbraad.gitlab.io/linux-kernel-build-stable
+enabled=1
+gpgcheck=0

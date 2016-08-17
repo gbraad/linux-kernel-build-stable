@@ -1,4 +1,4 @@
-image: centos:latest
+image: registry.gitlab.com/gbraad/centos:7
 
 before_script:
   - yum -y install git epel-release "@Development Tools"
@@ -7,15 +7,19 @@ before_script:
 
 pages:
   script:
-  - cat /etc/redhat-release
   - mkdir public
-  - curl https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.5.5.tar.xz -o linux.tar.xz
-  - tar -xJf linux.tar.xz
-  - mv linux-4.5.5 linux
+  - git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux --depth 1
   - cp config linux/.config
   - cd linux
   - make olddefconfig
   - make rpm
+  - cd ..
+  - mv /root/rpmbuild/RPMS/x86_64/* ./public
+  - mv /root/rpmbuild/SRPMS/* ./public
+  - createrepo --database ./public
+  - ls ./public/ | ./genindex.sh > ./index.html
+  - mv ./index.html ./public
+  - mv ./kernel-mainline.repo ./public
   artifacts:
     paths:
     - public
