@@ -8,7 +8,7 @@ before_script:
 pages:
   script:
   - mkdir public
-  - git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux --depth 1
+  - git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git linux -b linux-4.7.y --depth 1
   - cp config linux/.config
   - cd linux
   - make olddefconfig
